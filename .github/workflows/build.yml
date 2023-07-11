@@ -1,0 +1,26 @@
+name: '编译'
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      '手动编译':
+        description: '开始！'
+        type: boolean
+        required: true
+        default: true
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3.5.3
+      
+    - name: '配置bazel'
+      uses: abhinavsingh/setup-bazel@v3
+      
+    - name: '运行编译脚本'
+      run: 'sh ./build.sh'
+    
+
